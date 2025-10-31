@@ -5,9 +5,15 @@ agent:
     type: f1-standard-2
     os_image: ubuntu2204
 blocks:
-  - name: 'Block #1'
+  - name: Build and cache dependencies
     task:
       jobs:
         - name: 'Job #1'
           commands:
-            - checkout
+            - ' checkout'
+            - ' sem-version python 3.11'
+            - ' cache restore'
+            - ' pip install -r requirements.txt'
+            - ' cache store "pip-cache-$(checksum requirements.txt)" ~/.cache/pip'
+      secrets:
+        - name: DockerSecret
