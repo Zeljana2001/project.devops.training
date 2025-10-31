@@ -1,0 +1,16 @@
+version: v1.0
+name: Continuous Delivery pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Build Docker image
+    task:
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+            - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
+            - ls -la
+            - '''docker build -t zeljana01/final-project:${SEMAPHORE_GIT_SHA} .'''

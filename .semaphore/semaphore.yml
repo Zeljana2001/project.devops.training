@@ -65,3 +65,6 @@ blocks:
             - cyclonedx-py environment -o sbom.xml
             - artifact push workflow sbom.xml
             - cache store "pip-cache-$(checksum requirements.txt)" ~/.cache/pip
+promotions:
+  - name: Promotion 1
+    pipeline_file: pipeline_2.yml
