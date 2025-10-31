@@ -1,5 +1,5 @@
 version: v1.0
-name: Continuous Delivery pipeline
+name: Continuous Delivery Pipeline
 agent:
   machine:
     type: e1-standard-2
@@ -17,3 +17,6 @@ blocks:
             - 'docker push zeljana01/final-project:${SEMAPHORE_GIT_SHA}'
       secrets:
         - name: DockerSecret
+promotions:
+  - name: Promotion 1
+    pipeline_file: pipeline_3.yml
