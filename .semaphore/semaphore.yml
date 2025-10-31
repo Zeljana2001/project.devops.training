@@ -48,3 +48,20 @@ blocks:
             - pip install -r requirements.txt
             - pip install safety
             - safety check -r requirements.txt
+  - name: Generation of SBOM
+    dependencies:
+      - Dependency security scanning
+    task:
+      secrets:
+        - name: DockerSecret
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+            - sem-version python 3.11
+            - cache restore "pip-cache-$(checksum requirements.txt)"
+            - pip install -r requirements.txt
+            - pip install cyclonedx-bom
+            - cyclonedx-py environment -o sbom.xml
+            - artifact push workflow sbom.xml
+            - cache store "pip-cache-$(checksum requirements.txt)" ~/.cache/pip
