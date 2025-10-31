@@ -5,10 +5,10 @@ agent:
     type: e1-standard-2
     os_image: ubuntu2004
 blocks:
-  - name: 'Block #1'
+  - name: Create a namespace
     task:
       jobs:
-        - name: Create a namespace
+        - name: 'Job #1'
           commands:
             - checkout
             - kubectl create namespace zeljanar || true
@@ -27,4 +27,3 @@ blocks:
             - envsubst < examples/deployment.yml > deployment.yml
             - cat deployment.yml
             - kubectl apply -f deployment.yml -n zeljanar
-            - kubectl rollout status deployment/app-zeljana -n zeljanar
