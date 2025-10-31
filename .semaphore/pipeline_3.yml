@@ -27,4 +27,4 @@ blocks:
             - envsubst < examples/deployment.yml > deployment.yml
             - cat deployment.yml
             - kubectl apply -f deployment.yml -n zeljanar
-            - kubectl apply -f examples/service.yml
+            - kubectl apply -f examples/service.yml -n zeljanar
