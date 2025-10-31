@@ -14,5 +14,6 @@ blocks:
             - echo "$DOCKER_PASSWORD" | docker login --username "$DOCKER_USERNAME" --password-stdin
             - ls -la
             - 'docker build -t zeljana01/final-project:${SEMAPHORE_GIT_SHA} .'
+            - 'docker push zeljana01/final-project:${SEMAPHORE_GIT_SHA}'
       secrets:
         - name: DockerSecret
