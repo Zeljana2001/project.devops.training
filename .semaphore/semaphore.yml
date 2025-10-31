@@ -18,3 +18,18 @@ blocks:
             - cache restore
             - pip install -r requirements.txt
             - cache store "pip-cache-$(checksum requirements.txt)" ~/.cache/pip
+  - name: Lint
+    dependencies:
+      - Build and cache dependencies
+    task:
+      secrets:
+        - name: DockerSecret
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+            - sem-version python 3.11
+            - cache restore "pip-cache-$(checksum requirements.txt)"
+            - pip install -r requirements.txt
+            - pip install pylint
+            - pylint src
