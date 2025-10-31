@@ -14,3 +14,14 @@ blocks:
             - kubectl create namespace zeljanar || true
       secrets:
         - name: kubeconfig
+  - name: Deploy Docker image to Kubernetes
+    task:
+      secrets:
+        - name: DockerSecret
+        - name: kubeconfig
+      jobs:
+        - name: 'Job #1'
+          commands:
+            - checkout
+            - kubectl apply -f deployment.yml -n zeljanar
+            - kubectl rollout status deployment/app-zeljana -n zeljanar
